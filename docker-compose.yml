@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  test-odoo:
+    container_name: web-odoo
+    image: odoo:latest
+    depends_on:
+      - postgresdb
+    ports:
+      - 8069:8069
+    environment:
+      - HOST=postgresdb
+      - USER=root
+      - PASSWORD=root
+    networks:
+      - odoo-network
+  postgresdb:
+    image: postgres:15.4
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+    networks:
+      - odoo-network
+
+networks:
+  odoo-network:
+    driver: bridge
