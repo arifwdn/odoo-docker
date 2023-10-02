@@ -13,3 +13,8 @@ Aplikasi saat berjalan, dapat diakses :
 Backup database dan File web ada di folder
 
     /data
+
+## Version :
+
+- odoo:16.0
+- postgres:15.4
