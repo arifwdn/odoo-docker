@@ -14,9 +14,9 @@ services:
     networks:
       - odoo-network
     volumes:
-      - ./data/web:/var/lib/odoo
-      - ./config:/etc/odoo
-      - ./addons:/mnt/extra-addons
+      - odoo_app:/var/lib/odoo
+      - odoo_app:/etc/odoo
+      - odoo_app:/mnt/extra-addons
   postgresdb:
     image: postgres:15.4
     environment:
@@ -29,8 +29,21 @@ services:
     networks:
       - odoo-network
     volumes:
-      - ./data/db:/var/lib/postgresql/data/pgdata
+      - odoo_db:/var/lib/postgresql/data/pgdata
 
 networks:
   odoo-network:
     driver: bridge
+volumes:
+  odoo_app:
+    driver: local
+    driver_opts:
+      type: none
+      device: /data/app
+      o: bind
+  odoo_db:
+    driver: local
+    driver_opts:
+      type: none
+      device: /data/db
+      o: bind
