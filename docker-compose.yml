@@ -16,6 +16,7 @@ services:
     volumes:
       - odoo_app:/etc/odoo
   postgresdb:
+    container_name: postgresdb
     image: postgres:15.4
     environment:
       - POSTGRES_DB=postgres
@@ -32,6 +33,7 @@ services:
 networks:
   odoo-network:
     driver: bridge
+
 volumes:
   odoo_app:
     driver: local
